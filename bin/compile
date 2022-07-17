@@ -58,7 +58,7 @@ install_binaries() {
 
   if [ -n "$npm_engine" ]; then
     echo "-----> Install npm $npm_engine"
-    npm install -g "$npm_engine"
+    npm install -g "npm@$npm_engine"
   else
     echo "-----> Use default npm version"
     npm -v
@@ -66,7 +66,7 @@ install_binaries() {
 
   echo "-----> Install pnpm"
 #   curl -f https://get.pnpm.io/v6.16.js | node - add --global "$pnpm_engine"
-  npm install -g "$pnpm_engine"
+  npm install -g "pnpm@$pnpm_engine"
   pnpm config set store-dir "$CACHE_DIR"/.pnpm-store
 }
 
