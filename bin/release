@@ -4,5 +4,5 @@
 cat << EOF
 addons: []
 default_process_types:
-  web: pnpm run start
+  web: cd apps/checkout-app && pnpm run start
 EOF
