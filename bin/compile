@@ -40,6 +40,7 @@ create_env
 install_binaries() {
   local node_engine=$(read_json "$BUILD_DIR/package.json" ".engines.node" | sed 's/[^0-9]*//g')
   local npm_engine=$(read_json "$BUILD_DIR/package.json" ".engines.npm" | sed 's/[^0-9]*//g')
+  local pnpm_engine=$(read_json "$BUILD_DIR/package.json" ".packageManager" | sed 's/[^0-9]*//g')
 
   curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$BIN_DIR" --skip-shell
   export PATH=$BUILD_DIR/.heroku/bin:$PATH
@@ -64,7 +65,7 @@ install_binaries() {
   fi
 
   echo "-----> Install pnpm"
-  curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+  curl -f https://get.pnpm.io/v6.16.js | node - add --global "$pnpm_engine"
   pnpm config set store-dir "$CACHE_DIR"/.pnpm-store
 }
 
